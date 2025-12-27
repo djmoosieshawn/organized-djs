@@ -1,4 +1,37 @@
 <body>
+<body>
+
+<h1>ORGANiZED DJ’S</h1>
+<p>Request a song for the DJ</p>
+
+<form onsubmit="submitRequest(event)">
+  <input 
+    id="songInput" 
+    type="text" 
+    placeholder="Artist - Song Title"
+    required
+    style="padding:10px; width:100%; max-width:300px;"
+  />
+  <br><br>
+  <button type="submit">Send Request</button>
+</form>
+
+<p id="confirmation" style="margin-top:15px; color:#facc15;"></p>
+
+<script>
+function submitRequest(event) {
+  event.preventDefault();
+
+  const song = document.getElementById("songInput").value;
+  const confirmation = document.getElementById("confirmation");
+
+  confirmation.textContent = "🎵 Request sent: " + song;
+
+  document.getElementById("songInput").value = "";
+}
+</script>
+
+</body>
 
 <h1>ORGANiZED DJ’S</h1>
 <p>Your app is live. Interaction test below.</p>
