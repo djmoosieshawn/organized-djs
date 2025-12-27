@@ -1,47 +1,25 @@
-<body>
-<body>
-
-<h1>ORGANiZED DJ’S</h1>
-<p>Request a song for the DJ</p>
-
-<form onsubmit="submitRequest(event)">
-  <input 
-    id="songInput" 
-    type="text" 
-    placeholder="Artist - Song Title"
-    required
-    style="padding:10px; width:100%; max-width:300px;"
-  />
-  <br><br>
-  <button type="submit">Send Request</button>
-</form>
-
-<p id="confirmation" style="margin-top:15px; color:#facc15;"></p>
-
 <script>
+const API = "https://organized-djs-api-fhjh.onrender.com";
+
 function submitRequest(event) {
   event.preventDefault();
 
   const song = document.getElementById("songInput").value;
   const confirmation = document.getElementById("confirmation");
 
-  confirmation.textContent = "🎵 Request sent: " + song;
-
-  document.getElementById("songInput").value = "";
+  fetch(API + "/api/requests", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ song })
+  })
+  .then(res => res.json())
+  .then(data => {
+    confirmation.textContent = "🎵 Request sent to DJ: " + song;
+    document.getElementById("songInput").value = "";
+  })
+  .catch(err => {
+    confirmation.textContent = "❌ Error sending request";
+    console.error(err);
+  });
 }
 </script>
-
-</body>
-
-<h1>ORGANiZED DJ’S</h1>
-<p>Your app is live. Interaction test below.</p>
-
-<button onclick="testClick()">Click Me</button>
-
-<script>
-function testClick() {
-  alert("Interaction confirmed. Let’s build.");
-}
-</script>
-
-</body>
